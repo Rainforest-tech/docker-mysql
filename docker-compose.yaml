@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:${MYSQL_VERSION}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: password
+    ports:
+      - 3306:3306
+  myadmin:
+    image: phpmyadmin
+    environment:
+      PMA_HOST: mysql
+    links: 
+       - mysql
+    ports:
+       - 8081:80

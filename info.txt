@@ -1,0 +1,5 @@
+1. set env vars $env:ENV_NAME='name' for all env vars
+2. Create an artifact
+3. mysql container start (docker run --name mysql -d -p3306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=app_db mysql:8.0.22)
+4. phpmyadmin container start (docker run --name myadmin -d --link mysql:db -p 8081:80 phpmyadmin)
+5. run java app
