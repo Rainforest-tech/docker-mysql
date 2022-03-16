@@ -1,6 +1,16 @@
 version: '3'
 
 services:
+  java-app:
+    image: java_app
+    environment:
+      - DB_USER=root
+      - DB_PWD=${MYSQL_ROOT_PASSWORD}
+      - DB_SERVER=mysql
+      - DB_NAME=${MYSQL_DATABASE}
+    ports:
+      - 8080:8080
+    container_name: my-java-app
   mysql:
     image: mysql:${MYSQL_VERSION}
     environment:
@@ -10,6 +20,9 @@ services:
       MYSQL_PASSWORD: password
     ports:
       - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+
   myadmin:
     image: phpmyadmin
     environment:
@@ -18,3 +31,8 @@ services:
        - mysql
     ports:
        - 8081:80
+  
+volumes:
+  mysql-data:
+    driver: local
+
